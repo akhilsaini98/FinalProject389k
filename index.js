@@ -3,6 +3,17 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var exphbs = require('express-handlebars');
 var _ = require("underscore");
+var mongoose = require('mongoose');
+var dotenv = require('dotenv');
+
+dotenv.config();
+
+console.log(process.env.MONGODB)
+mongoose.connect("mongodb://sainiakhil98@gmail.com:389kProject%21@finalproj-shard-00-00-f9lan.mongodb.net:27017,finalproj-shard-00-01-f9lan.mongodb.net:27017,finalproj-shard-00-02-f9lan.mongodb.net:27017/test?ssl=true&replicaSet=FinalProj-shard-0&authSource=admin&retryWrites=true");
+mongoose.connection.on('error', function() {
+    console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
+    process.exit(1);
+});
 
 
 var fs = require('fs');
