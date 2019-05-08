@@ -5,6 +5,7 @@ var exphbs = require('express-handlebars');
 var _ = require("underscore");
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
+var Intern = require('./models/Intern');
 
 dotenv.config();
 
