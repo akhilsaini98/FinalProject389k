@@ -1,0 +1,77 @@
+<link rel="stylesheet" type="text/css" href="/public/css/home.css">
+
+  <h1 id= "title">Find an Intern Buddy!</h1>
+
+<article>
+  <h3>Search by Company Name:</h3>
+  <input id="search_field" type="text" placeholder="Google" onkeyup="search_function()">
+</article>
+<br>
+
+<div>
+  <table id="internTable">
+    <tr>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Characteristics/Interests</th>
+    </tr>
+
+    {{#each all}}
+
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.company}}</td>
+        <td>{{this.age}}</td>
+        <td>{{this.gender}}</td>
+        <td>{{this.phone}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.characteristicsInterests}}</td>
+      </tr>
+
+    {{/each}}
+
+  </table>
+</div>
+
+<p id="noResults"> </p>
+
+<a href="/addIntern">Click Here to Contribute (Add Yourself)</a>
+
+<script>
+
+  function search_function() {
+
+    var originalSearch = document.getElementById("search_field").value
+    var searchIn = document.getElementById("search_field").value.toLowerCase()
+    var rows = document.getElementById("internTable").getElementsByTagName("tr")
+    var count = rows.length - 1
+
+    for (var x = 0; x < rows.length; x++) {
+      var rowName = rows[x].getElementsByTagName("td")[1]
+
+      if (rowName) {
+        var companyName = rowName.textContent || rowName.innerText
+        //console.log(all)
+        if (companyName.toLowerCase().startsWith(searchIn)) {
+          rows[x].style.display = ""
+        } else {
+          rows[x].style.display = "none"
+          count = count - 1
+        }
+      }
+    }
+    if (count === 0) {
+      rows[0].style.display = "none"
+        document.getElementById("noResults").innerHTML = `No one is interning at ${originalSearch} :(`;
+    }
+    else {
+      rows[0].style.display = ""
+      document.getElementById("noResults").innerHTML = "";
+    }
+
+  }
+</script>

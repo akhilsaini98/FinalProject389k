@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="/public/css/microsoft.css">
+
+
+<h1 id="mInt">Microsoft Interns:)</h1>
+
+<img src="https://media.licdn.com/dms/image/C4D0BAQEko6uLz7XylA/company-logo_200_200/0?e=2159024400&v=beta&t=a1kve4i0YyusChyNR_Cvvn2vnHNUHhZ4H2rnYCxjQhU" class="center" width="100" height="100">
+<br>
+<div>
+  <table id="microsoftTable">
+    <tr>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Characteristics/Interests</th>
+    </tr>
+
+    {{#each mInterns}}
+
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.company}}</td>
+        <td>{{this.age}}</td>
+        <td>{{this.gender}}</td>
+        <td>{{this.phone}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.characteristicsInterests}}</td>
+      </tr>
+
+    {{/each}}
+
+  </table>
+</div>

@@ -1,0 +1,13 @@
+<link rel="stylesheet" type="text/css" href="/public/css/random.css">
+
+{{#if randomIntern}}
+<p>Name: {{randomIntern.name}}</p>
+<p>Company: {{randomIntern.company}}</p>
+<p>Age: {{randomIntern.age}}</p>
+<p>Gender: {{randomIntern.gender}}</p>
+<p>Phone: {{randomIntern.phone}}</p>
+<p>Email: {{randomIntern.email}}</p>
+<p>Characteristics/Interests {{randomIntern.characteristicsInterests}}</p>
+{{else}}
+<h3 id = "nope"> No one is interning at {{original}} :( </h3>
+{{/if}}

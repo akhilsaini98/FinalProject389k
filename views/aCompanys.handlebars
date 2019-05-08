@@ -1,0 +1,33 @@
+<link rel="stylesheet" type="text/css" href="/public/css/alphabetical.css">
+
+
+<h1 id = "alphaC">Interns by Alphabetical Order(Company)</h1>
+
+<div>
+  <table id="alphaComTable">
+    <tr>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Characteristics/Interests</th>
+    </tr>
+
+    {{#each alphaComp}}
+
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.company}}</td>
+        <td>{{this.age}}</td>
+        <td>{{this.gender}}</td>
+        <td>{{this.phone}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.characteristicsInterests}}</td>
+      </tr>
+
+    {{/each}}
+
+  </table>
+</div>
