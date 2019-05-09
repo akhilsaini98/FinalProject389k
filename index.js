@@ -10,7 +10,7 @@ var Intern = require('./models/Intern');
 dotenv.config();
 
 console.log(process.env.MONGODB)
-mongoose.connect("mongodb://test:pass@finalproj-shard-00-00-f9lan.mongodb.net:27017,finalproj-shard-00-01-f9lan.mongodb.net:27017,finalproj-shard-00-02-f9lan.mongodb.net:27017/test?ssl=true&replicaSet=FinalProj-shard-0&authSource=admin&retryWrites=true");
+mongoose.connect(process.env.MONGODB);
 mongoose.connection.on('error', function() {
     console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
     process.exit(1);
@@ -39,60 +39,75 @@ app.use('/public', express.static('public'));
 
 app.get('/',function(req,res){
 
-  res.render('home',{
-    all : _DATA
-  });
+  Intern.find({},function(err, interns){
+    if(err) throw err
+    res.render('home',{
+      all : interns
+    });
+})
+
 })
 
 app.get('/microsoft',function(req,res){
 
-    var mIntern = _.where(_DATA, {
-      company: "Microsoft"
-    });
+  Intern.find({company: "Microsoft"}, function(err, interns){
+    if(err) throw err
+    
+    res.render('microsoft',{
+      mInterns: interns
+   });
+  
+});
 
-  res.render('microsoft',{
-     mInterns: mIntern
-  });
 })
 
 app.get('/male',function(req,res){
 
-  var maleI = _.where(_DATA, {
-    gender: "M"
-  });
+  Intern.find({gender: "M"}, function(err, interns){
+    if(err) throw err
+    
+    res.render('male',{
+      maleInterns: interns
+    });
+});
 
-  res.render('male',{
-    maleInterns: maleI
-  });
+ 
 })
 
 app.get('/female',function(req,res){
 
-  var femaleI = _.where(_DATA, {
-    gender: "F"
-  });
+  Intern.find({gender: "F"}, function(err, interns){
+    if(err) throw err
+    
+    res.render('female',{
+      femaleInterns: interns
+    });
+});
 
-  res.render('female',{
-    femaleInterns: femaleI
-  });
 })
 
 app.get('/alphabeticalNames',function(req,res){
 
-  var alphaNames = _.sortBy(_DATA, 'name')
-
-  res.render('aNames',{
-    alphaName: alphaNames
-  });
+  Intern.find({},function(err, interns){
+    if(err) throw err
+    res.render('aNames',{
+      alphaName: _.sortBy(interns, 'name')
+    });
+})
+  
 })
 
 app.get('/alphabeticalCompanys',function(req,res){
 
-var alphaC = _.sortBy(_DATA, 'company')
+  Intern.find({},function(err, interns){
+    if(err) throw err
 
-  res.render('aCompanys',{
-    alphaComp: alphaC
-  });
+    res.render('aCompanys',{
+      alphaComp: _.sortBy(interns, 'company')
+    });
+
+})
+
 })
 
 app.get('/random',function(req,res){
@@ -137,41 +152,47 @@ app.get('/addIntern',function(req,res){
 
 app.post('/addIntern',function(req,res){
 
-  var answer = {
-    "name": fix_capitals(req.body.name),
-    "company": fix_capitals(req.body.company),
-    "age": parseInt(req.body.age),
-    "gender": fix_capitals(req.body.gender),
-    "phone": req.body.number,
-    "email": req.body.email,
-    "characteristicsInterests": req.body.characters.split(",")
-  };
+  var intern = new Intern({
+   
+     name: fix_capitals(req.body.name),
+     company: fix_capitals(req.body.company),
+     age: parseInt(req.body.age),
+     gender: fix_capitals(req.body.gender),
+     phone: req.body.number,
+     email: req.body.email,
+     characteristicsInterests: req.body.characters.split(",")
 
-  _DATA.push(answer)
-  dataUtil.saveData(_DATA)
-  res.render('success',{
-    firstName : fix_capitals(req.body.name.split(" ")[0])
-  });
+  })
+
+  intern.save(function(err) {
+    if(err) throw err
+      res.render('success',{
+      firstName : fix_capitals(req.body.name.split(" ")[0])
+    });
+})
+ 
 })
 
 app.post("/api/addIntern", function(req, res) {
 
   if(!req.body) { return res.send("No data recieved"); }
 
-    var
-  answer = {
-    "name": fix_capitals(req.body["name"]),
-    "company": fix_capitals(req.body["company"]),
-    "age": parseInt(req.body["age"]),
-    "gender": fix_capitals(req.body.gender),
-    "phone": req.body["phone"],
-    "email": req.body["email"],
-    "characteristicsInterests": req.body["characteristicsInterests"].split(",")
-  };
+  var intern = new Intern({
+   
+    name: fix_capitals(req.body["name"]),
+    company: fix_capitals(req.body["company"]),
+    age: parseInt(req.body["age"]),
+    gender: fix_capitals(req.body.gender),
+    phone: req.body["phone"],
+    email: req.body["email"],
+    characteristicsInterests: req.body["characteristicsInterests"].split(",")
 
-  _DATA.push(answer)
-  dataUtil.saveData(_DATA)
-  res.send(answer)
+ })
+  
+ intern.save(function(err) {
+  if(err) throw err
+  res.send(intern)
+})
 
 });
 
