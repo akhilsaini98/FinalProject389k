@@ -64,5 +64,14 @@ var foodSchema = new mongoose.Schema({
 });
 
 var Intern = mongoose.model('Intern', internSchema);
+var Activity = mongoose.model('Activity', activitySchema);
+var Food = mongoose.model('Food', foodSchema);
 
-module.exports = Intern;
+
+//module.exports = Intern;
+
+module.exports = {
+    Intern: Intern,
+    Activity: Activity,
+    Food: Food
+}

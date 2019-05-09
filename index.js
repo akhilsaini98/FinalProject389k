@@ -5,7 +5,7 @@ var exphbs = require('express-handlebars');
 var _ = require("underscore");
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
-var Intern = require('./models/Intern');
+var data = require('./models/Intern');
 
 dotenv.config();
 
@@ -15,12 +15,6 @@ mongoose.connection.on('error', function() {
     console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
     process.exit(1);
 });
-
-
-var fs = require('fs');
-var dataUtil = require("./intern-data-util");
-
-var _DATA = dataUtil.loadData().interns;
 
 
 var app = express();
@@ -39,7 +33,7 @@ app.use('/public', express.static('public'));
 
 app.get('/',function(req,res){
 
-  Intern.find({},function(err, interns){
+  data.Intern.find({},function(err, interns){
     if(err) throw err
     res.render('home',{
       all : interns
@@ -50,7 +44,7 @@ app.get('/',function(req,res){
 
 app.get('/microsoft',function(req,res){
 
-  Intern.find({company: "Microsoft"}, function(err, interns){
+  data.Intern.find({company: "Microsoft"}, function(err, interns){
     if(err) throw err
     
     res.render('microsoft',{
@@ -63,7 +57,7 @@ app.get('/microsoft',function(req,res){
 
 app.get('/male',function(req,res){
 
-  Intern.find({gender: "M"}, function(err, interns){
+  data.Intern.find({gender: "M"}, function(err, interns){
     if(err) throw err
     
     res.render('male',{
@@ -76,7 +70,7 @@ app.get('/male',function(req,res){
 
 app.get('/female',function(req,res){
 
-  Intern.find({gender: "F"}, function(err, interns){
+  data.Intern.find({gender: "F"}, function(err, interns){
     if(err) throw err
     
     res.render('female',{
@@ -88,7 +82,7 @@ app.get('/female',function(req,res){
 
 app.get('/alphabeticalNames',function(req,res){
 
-  Intern.find({},function(err, interns){
+  data.Intern.find({},function(err, interns){
     if(err) throw err
     res.render('aNames',{
       alphaName: _.sortBy(interns, 'name')
@@ -99,7 +93,7 @@ app.get('/alphabeticalNames',function(req,res){
 
 app.get('/alphabeticalCompanys',function(req,res){
 
-  Intern.find({},function(err, interns){
+  data.Intern.find({},function(err, interns){
     if(err) throw err
 
     res.render('aCompanys',{
@@ -112,38 +106,50 @@ app.get('/alphabeticalCompanys',function(req,res){
 
 app.get('/random',function(req,res){
 
+
   var cNames = []
 
-  _.each(_DATA, function(i) {
-    var compName = i.company
+  data.Intern.find({},function(err, interns){
+    if(err) throw err
 
-    if (cNames.includes(compName) === false) {
-      cNames.push(compName)
-    }
+    _.each(interns, function(i) {
+      var compName = i.company
+  
+      if (cNames.includes(compName) === false) {
+        cNames.push(compName)
+      }
+  
+    })
 
-  })
-  cNames.sort()
+    cNames.sort()
 
-  res.render('random',{
-    names: cNames
-  });
+    res.render('random',{
+      names: cNames
+    });
+
+})
+
 })
 
 app.post('/getRandom',function(req,res){
 
   var answer = false
   var inp = fix_capitals(req.body.name)
-  var all = _.where(_DATA, {
-    company: inp
-  });
 
-  if (all.length > 0) {
-  answer = _.sample(all);
-  }
-  res.render('returnRandom',{
+  data.Intern.find({company: inp}, function(err, interns){
+    if(err) throw err
+    
+    if (interns.length > 0) {
+      answer = _.sample(interns);
+    }
+
+    res.render('returnRandom',{
       randomIntern : answer,
       original: inp
   });
+   
+});
+
 })
 
 app.get('/addIntern',function(req,res){
@@ -152,7 +158,7 @@ app.get('/addIntern',function(req,res){
 
 app.post('/addIntern',function(req,res){
 
-  var intern = new Intern({
+  var intern = new data.Intern({
    
      name: fix_capitals(req.body.name),
      company: fix_capitals(req.body.company),
@@ -177,7 +183,7 @@ app.post("/api/addIntern", function(req, res) {
 
   if(!req.body) { return res.send("No data recieved"); }
 
-  var intern = new Intern({
+  var intern = new data.Intern({
    
     name: fix_capitals(req.body["name"]),
     company: fix_capitals(req.body["company"]),
@@ -198,49 +204,64 @@ app.post("/api/addIntern", function(req, res) {
 
 app.get("/api/getInterns", function(req, res) {
 
-res.send(_DATA)
+  data.Intern.find({},function(err, interns){
+    if(err) throw err
+    res.send(interns)
+})
+
+
 
 });
 
 app.get("/api/male", function(req, res) {
 
-  var maleI = _.where(_DATA, {
-    gender: "M"
-  });
+  data.Intern.find({gender: "M"}, function(err, interns){
+    if(err) throw err
 
-res.send(maleI)
+    res.send(interns)
+})
 
 });
 
 app.get("/api/female", function(req, res) {
 
-  var femaleI = _.where(_DATA, {
-    gender: "F"
-  });
-res.send(femaleI)
+  data.Intern.find({gender: "F"}, function(err, interns){
+    if(err) throw err
+    res.send(interns)
+
+});
 
 });
 
 app.get("/api/getAlphaName", function(req, res) {
 
-var alphaNames = _.sortBy(_DATA, 'name')
-res.send(alphaNames)
+  data.Intern.find({},function(err, interns){
+    if(err) throw err
+    res.send(_.sortBy(interns, 'name'))
+    
+})
 
 });
 
 app.get("/api/getAlphaComp", function(req, res) {
 
-var alphaComp = _.sortBy(_DATA, 'company')
-res.send(alphaComp)
+
+  data.Intern.find({},function(err, interns){
+    if(err) throw err
+    res.send(_.sortBy(interns, 'company'))
+
+})
 
 });
 
 app.get("/api/getMicro", function(req, res) {
 
-var micro = _.where(_DATA, {
-  company: "Microsoft"
+
+  data.Intern.find({company: "Microsoft"}, function(err, interns){
+    if(err) throw err
+    res.send(interns)
 });
-res.send(micro)
+
 
 });
 
