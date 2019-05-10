@@ -89,7 +89,7 @@ var request = require("request");
 
 var options = {
     method: 'POST',
-    url: 'http://localhost:3000/api/addIntern',
+    url: 'https://final-389k.herokuapp.com/api/addIntern',
     headers: {
         'content-type': 'application/x-www-form-urlencoded'
     },
@@ -118,7 +118,7 @@ var request = require("request");
 
 var options = {
     method: 'POST',
-    url: 'http://localhost:3000/api/addActivity',
+    url: 'https://final-389k.herokuapp.com/api/addActivity',
     headers: {
         'content-type': 'application/x-www-form-urlencoded'
     },
@@ -149,7 +149,7 @@ var request = require("request");
 
 var options = {
     method: 'POST',
-    url: 'http://localhost:3000/api/addFood',
+    url: 'https://final-389k.herokuapp.com/api/addFood',
     headers: {
         'content-type': 'application/x-www-form-urlencoded'
     },
@@ -209,7 +209,7 @@ var request = require("request");
 
 var options = {
     method: 'DELETE',
-    url: 'http://localhost:3000/api/removeIntern',
+    url: 'https://final-389k.herokuapp.com/api/removeIntern',
     headers: {
         'content-type': 'application/x-www-form-urlencoded'
     },
@@ -231,7 +231,7 @@ var request = require("request");
 
 var options = {
     method: 'DELETE',
-    url: 'http://localhost:3000/api/removeFood',
+    url: 'https://final-389k.herokuapp.com/api/removeFood',
     headers: {
         'content-type': 'application/x-www-form-urlencoded'
     },
