@@ -178,6 +178,21 @@ app.get('/addIntern',function(req,res){
   res.render('addIntern',{});
 })
 
+app.get('/removeIntern',function(req,res){
+  res.render('removeIntern',{});
+})
+
+app.post('/removeIntern',function(req,res){
+
+  data.Intern.deleteOne({name: fix_capitals(req.body.name)},function(err) {
+    if(err) throw err
+      res.render('deleteInternSuccess',{
+      Name : fix_capitals(req.body.name)
+    });
+})
+
+})
+
 
 app.post('/addIntern',function(req,res){
 
@@ -217,6 +232,7 @@ app.post('/addActivity',function(req,res){
      date: req.body.date
   })
 
+ 
   activity.save(function(err) {
     if(err) throw err
       res.render('successActivity',{
