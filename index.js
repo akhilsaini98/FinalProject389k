@@ -37,7 +37,9 @@ app.get('/',function(req,res){
   data.Intern.find({},function(err, interns){
     if(err) throw err
     res.render('home',{
-      all : interns
+      all : interns,
+      Happy: emoji.get('smile'),
+      Sad: emoji.get('crying_cat_face')
     });
 })
 
@@ -52,7 +54,8 @@ app.get('/activities',function(req,res){
   data.Activity.find({},function(err, activities){
     if(err) throw err
     res.render('activities',{
-      all : activities
+      all : activities,
+      Position: emoji.get('woman_in_lotus_position')
     });
 })
 
@@ -63,7 +66,9 @@ app.get('/food',function(req,res){
   data.Food.find({},function(err, food){
     if(err) throw err
     res.render('food',{
-      all : food
+      all : food,
+      Bread: emoji.get('stuffed_flatbread'),
+      Soup: emoji.get('shallow_pan_of_food')
     });
 })
 
@@ -88,7 +93,8 @@ app.get('/male',function(req,res){
     if(err) throw err
 
     res.render('male',{
-      maleInterns: interns
+      maleInterns: interns,
+      male: emoji.get("bearded_person")
     });
 });
 
@@ -101,7 +107,8 @@ app.get('/female',function(req,res){
     if(err) throw err
 
     res.render('female',{
-      femaleInterns: interns
+      femaleInterns: interns,
+      female: emoji.get("female-student")
     });
 });
 
@@ -151,7 +158,9 @@ app.get('/random',function(req,res){
     cNames.sort()
 
     res.render('random',{
-      names: cNames
+      names: cNames,
+      red: emoji.get('question'),
+      white: emoji.get('grey_question')
     });
 
 })
