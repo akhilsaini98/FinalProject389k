@@ -3,18 +3,21 @@
 
 ---
 
-Name: Akhil Saini
+Names: Akhil Saini, Sahana Raju, Sam Jalocowiz
 
 Date: April 9, 2019
 
-Project Topic: Find who is interning with you from your school
+Project Topic: Find who is interning with you from your school, find activities to do
+ near your internship location, and food places to eat nearby!
 
-URL: https://intern-buddy-akhil.herokuapp.com/
+URL:
 
 ---
 
 
-### 1. Data Format and Storage
+### 1. Schemas
+
+### 1a. Intern Schema
 
 Data point fields:
 - `Field 1`: Name                        `Type: String`
@@ -35,6 +38,40 @@ Schema:
   phone : String,
   email : String,
   characteristicsInterests: [String]
+}
+```
+### 1b. Activity Schema
+
+Data point fields:
+- `Field 1`: Title                       `Type: String`
+- `Field 2`: Description                 `Type: String`
+- `Field 3`: Location                    `Type: Number`
+- `Field 4`: Date                        `Type: String`
+
+Schema:
+```javascript
+{
+  title : String,
+  description : String,
+  location : String,
+  date : String,
+}
+```
+### 1c. Food Schema
+
+Data point fields:
+- `Field 1`: Title                       `Type: String`
+- `Field 2`: Rating                      `Type: Number`
+- `Field 3`: Location                    `Type: String`
+- `Field 4`: Reviews                     `Type: String`
+
+Schema:
+```javascript
+{
+  title : String,
+  rating : String,
+  location : Number,
+  reviews : String,
 }
 ```
 
