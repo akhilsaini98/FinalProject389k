@@ -3,7 +3,7 @@
 
 ---
 
-Names: Akhil Saini, Sahana Raju, Sam Jalocowiz
+Names: Akhil Saini, Sahana Raju, Sam Jalowicz
 
 Date: May 10, 2019
 
