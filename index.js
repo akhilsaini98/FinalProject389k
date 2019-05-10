@@ -195,7 +195,7 @@ app.post('/removeIntern',function(req,res){
     });
 })
 
-})
+});
 
 
 app.post('/addIntern',function(req,res){
@@ -250,11 +250,26 @@ app.get('/addFood',function(req,res){
   res.render('addFood',{});
 })
 
+app.get('/removeFood',function(req,res){
+  res.render('removeFood',{});
+})
+
+app.post('/removeFood',function(req,res){
+
+  data.Food.deleteMany({title: fix_capitals(req.body.name)},function(err) {
+    if(err) throw err
+      res.render('deleteFoodSuccess',{
+      Name : fix_capitals(req.body.name)
+    });
+})
+
+});
+
 
 app.post('/addFood',function(req,res){
 
   var food = new data.Food({
-     title: req.body.title,
+     title: fix_capitals(req.body.title),
      rating: parseInt(req.body.rating),
      location: req.body.location,
      reviews: req.body.reviews
@@ -268,6 +283,29 @@ app.post('/addFood',function(req,res){
 })
 
 })
+
+app.delete("/api/removeFood", function(req, res) {
+
+  if(!req.body) { return res.send("No data recieved"); }
+
+  data.Food.findOneAndDelete({title: fix_capitals(req.body["title"])},function(err,food) {
+    if(err) throw err
+    res.send(food)
+    });
+
+});
+
+app.delete("/api/removeIntern", function(req, res) {
+
+  if(!req.body) { return res.send("No data recieved"); }
+
+  data.Intern.findOneAndDelete({name: fix_capitals(req.body["name"])},function(err,intern) {
+    if(err) throw err
+    res.send(intern)
+    });
+
+});
+
 
 
 app.post("/api/addIntern", function(req, res) {
@@ -299,8 +337,6 @@ app.get("/api/getInterns", function(req, res) {
     if(err) throw err
     res.send(interns)
 })
-
-
 
 });
 
