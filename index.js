@@ -194,6 +194,7 @@ app.post('/addIntern',function(req,res){
 })
 
 app.get('/addActivity',function(req,res){
+  console.log("yeet")
   res.render('addActivity',{});
 })
 
