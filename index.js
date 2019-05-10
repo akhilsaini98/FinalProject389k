@@ -6,6 +6,7 @@ var _ = require("underscore");
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var data = require('./models/Intern');
+var emoji = require('node-emoji');
 
 dotenv.config();
 
@@ -191,7 +192,8 @@ app.post('/removeIntern',function(req,res){
   data.Intern.deleteOne({name: fix_capitals(req.body.name)},function(err) {
     if(err) throw err
       res.render('deleteInternSuccess',{
-      Name : fix_capitals(req.body.name)
+      Name : fix_capitals(req.body.name),
+      Sad: emoji.get('white_frowning_face')
     });
 })
 
@@ -236,7 +238,7 @@ app.post('/addActivity',function(req,res){
      date: req.body.date
   })
 
- 
+
   activity.save(function(err) {
     if(err) throw err
       res.render('successActivity',{
