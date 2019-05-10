@@ -214,6 +214,7 @@ app.post('/addActivity',function(req,res){
      title: req.body.title,
      description: req.body.description,
      location: fix_capitals(req.body.location),
+     date: req.body.date
   })
 
   activity.save(function(err) {

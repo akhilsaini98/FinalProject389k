@@ -42,6 +42,10 @@ var activitySchema = new mongoose.Schema({
     location: {
         type: String,
         required: true
+    },
+    date: {
+        type: String,
+        required: true
     }
 });
 
