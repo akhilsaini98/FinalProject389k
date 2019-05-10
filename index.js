@@ -42,6 +42,10 @@ app.get('/',function(req,res){
 
 })
 
+app.get('/about',function(req,res){
+    res.render('about')
+})
+
 app.get('/activities',function(req,res){
 
   data.Activity.find({},function(err, activities){
