@@ -10,7 +10,7 @@ Date: May 10, 2019
 Project Topic: Find who is interning with you from your school, find activities to do
  near your internship location, and food places to eat nearby!
 
-URL: https://git.heroku.com/final-389k.git
+URL: https://final-389k.herokuapp.com/
 
 ---
 
