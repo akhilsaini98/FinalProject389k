@@ -83,6 +83,7 @@ HTML form route: `/addIntern'`
 POST endpoint route: `/api/addIntern'`
 
 Example Node.js POST request to endpoint:
+
 ```javascript
 var request = require("request");
 
@@ -111,6 +112,7 @@ HTML form route: `/addActivity'`
 POST endpoint route: `/api/addActivity`
 
 Example Node.js POST request to endpoint:
+
 ```javascript
 var request = require("request");
 
@@ -141,6 +143,7 @@ HTML form route: `/addFood'`
 POST endpoint route: `/api/addFood'`
 
 Example Node.js POST request to endpoint:
+
 ```javascript
 var request = require("request");
 
@@ -243,4 +246,7 @@ For this portion of the project we downloaded npm node-emoji in order to incorpo
 
 ### 9. Socket Usage
 
-If you have two users looking at the interns and one person adds an intern, then the other viewer will be able to immediately see this intern without refreshing.
+If you have two users looking at the interns and one person adds an intern, then the other viewer will be able to immediately see this intern without refreshing. Also, the viewer gets a text that pops up on the intern page that says "____ has been added!" immediately!
+
+### 10. MONGODB
+We utilized mongodb to store all of our data regarding interns, activities and food(our three schemas).
