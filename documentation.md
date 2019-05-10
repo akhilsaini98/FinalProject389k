@@ -10,7 +10,7 @@ Date: May 10, 2019
 Project Topic: Find who is interning with you from your school, find activities to do
  near your internship location, and food places to eat nearby!
 
-URL:
+URL: https://git.heroku.com/final-389k.git
 
 ---
 
@@ -28,7 +28,7 @@ Data point fields:
 - `Field 7`: Characteristics/Interests   `Type: [String]`
 
 Schema:
-```javascript
+```Mongo
 {
   name : String,
   company : String,
@@ -48,7 +48,7 @@ Data point fields:
 - `Field 4`: Date                        `Type: String`
 
 Schema:
-```javascript
+```Mongo
 {
   title : String,
   description : String,
@@ -65,7 +65,7 @@ Data point fields:
 - `Field 4`: Reviews                     `Type: String`
 
 Schema:
-```javascript
+```Mongo
 {
   title : String,
   rating : String,
