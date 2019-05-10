@@ -40,6 +40,8 @@ app.get('/',function(req,res){
     });
 })
 
+console.log("Hi")
+
 })
 
 app.get('/activities',function(req,res){
