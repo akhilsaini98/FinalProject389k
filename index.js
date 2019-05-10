@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var data = require('./models/Intern');
 var emoji = require('node-emoji');
-
+var fix_capitals = require("./fix_capitals");
 dotenv.config();
 
 console.log(process.env.MONGODB)
@@ -458,7 +458,7 @@ http.listen(process.env.PORT || 3000, function() {
 
 
 
-function fix_capitals(string)
+/* function fix_capitals(string)
 {
   string = string.toLowerCase()
   var all = string.split(" ");
@@ -468,4 +468,4 @@ function fix_capitals(string)
   }
 
   return all.join(" ");
-}
+} */
