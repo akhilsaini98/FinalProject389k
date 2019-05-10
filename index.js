@@ -358,7 +358,7 @@ app.post("/api/addFood", function(req, res) {
     title: req.body["title"],
     rating: req.body["rating"],
     location: req.body["location"],
-    reviews: req.body["reviews"],
+    reviews: req.body["reviews"]
 
  })
 
