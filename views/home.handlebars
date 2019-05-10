@@ -2,6 +2,8 @@
 
   <h1 id= "title">Find an Intern Buddy! {{Happy}}</h1>
 
+  <div class="hide"></div>
+
 <article>
   <h3>Search by Company Name:</h3>
   <input id="search_field" type="text" placeholder="Google" onkeyup="search_function()">
@@ -42,6 +44,8 @@
 <a href="/addIntern">Click Here to Contribute (Add Yourself)</a>
 <a href="/removeIntern">Click Here to remove yourself {{Sad}} </a>
 
+
+
 <script>
 
   function search_function() {
@@ -75,4 +79,11 @@
     }
 
   }
+
+  socket.on('new intern', function(int){
+    $('#internTable').append("<tr><td>" + int.name + "</td><td>" + int.company + "</td><td>"+ int.age + "</td><td>" + int.gender + "</td><td>" + int.phone + "</td><td>" + int.email + "</td><td>" + int.characteristicsInterests + "</td></tr>");
+    $( ".hide" ).append( "<h2>" + int.name + " has been added!" + "</h2>" );
+
+});
+
 </script>

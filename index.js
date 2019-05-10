@@ -19,6 +19,8 @@ mongoose.connection.on('error', function() {
 
 
 var app = express();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -31,6 +33,13 @@ app.use('/public', express.static('public'));
  * have '/api' prepended to them. Please remember that you need at least 5
  * endpoints for the API, and 5 others.
  */
+
+io.on('connection', function(socket) {
+  console.log('NEW connection.');
+  socket.on('disconnect', function(){
+      console.log('Oops. A user disconnected.');
+});
+});
 
 app.get('/',function(req,res){
 
@@ -225,8 +234,9 @@ app.post('/addIntern',function(req,res){
 
   intern.save(function(err) {
     if(err) throw err
-      res.render('success',{
-      firstName : fix_capitals(req.body.name.split(" ")[0])
+    io.emit('new intern', intern);
+    res.render('success',{
+    firstName : fix_capitals(req.body.name.split(" ")[0])
     });
 })
 
@@ -403,7 +413,7 @@ app.get("/api/getMicro", function(req, res) {
 
 });
 
-app.listen(process.env.PORT || 3000, function() {
+http.listen(process.env.PORT || 3000, function() {
     console.log('Listening!');
 });
 
