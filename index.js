@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var data = require('./models/Intern');
 var emoji = require('node-emoji');
-//var bread = require("./bread");
+
 
 dotenv.config();
 
