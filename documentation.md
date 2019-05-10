@@ -5,7 +5,7 @@
 
 Names: Akhil Saini, Sahana Raju, Sam Jalocowiz
 
-Date: April 9, 2019
+Date: May 10, 2019
 
 Project Topic: Find who is interning with you from your school, find activities to do
  near your internship location, and food places to eat nearby!
@@ -236,3 +236,11 @@ var options = {
       title : 'Rasika'
     }
 };
+```
+### 8. NPM Module Usage
+
+For this portion of the project we downloaded npm node-emoji in order to incorporate emoji images into our project.
+
+### 9. Socket Usage
+
+If you have two users looking at the interns and one person adds an intern, then the other viewer will be able to immediately see this intern without refreshing.
