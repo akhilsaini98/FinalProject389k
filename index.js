@@ -331,18 +331,38 @@ app.post("/api/addActivity", function(req, res) {
 
   if(!req.body) { return res.send("No data recieved"); }
 
-  var intern = new data.Activity({
+  var activity = new data.Activity({
 
     title: req.body["title"],
-    description: (req.body["description"]),
+    description: req.body["description"],
     location: req.body["location"],
     date: req.body["date"],
 
  })
 
- intern.save(function(err) {
+ activity.save(function(err) {
   if(err) throw err
-  res.send(intern)
+  res.send(activity)
+})
+
+});
+
+app.post("/api/addFood", function(req, res) {
+
+  if(!req.body) { return res.send("No data recieved"); }
+
+  var food = new data.Food({
+
+    title: req.body["title"],
+    rating: req.body["rating"],
+    location: req.body["location"],
+    reviews: req.body["reviews"],
+
+ })
+
+ food.save(function(err) {
+  if(err) throw err
+  res.send(food)
 })
 
 });
