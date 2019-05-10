@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var data = require('./models/Intern');
 var emoji = require('node-emoji');
-//var bread = require("./bread");
+var bread = require('./bread');
 var fix_capitals = require("./fix_capitals");
 
 dotenv.config();
@@ -458,21 +458,3 @@ app.get("/api/getMicro", function(req, res) {
 http.listen(process.env.PORT || 3000, function() {
     console.log('Listening!');
 });
-
-
-
-<<<<<<< HEAD
-function fix_capitals(string){
-=======
-/* function fix_capitals(string)
-{
->>>>>>> d3f0835abe3876cbf0a3dee758884e5c9f06e4fd
-  string = string.toLowerCase()
-  var all = string.split(" ");
-  var x = all.length
-  for (var i = 0; i < x; i++) {
-      all[i] = all[i][0].toUpperCase() + all[i].substr(1);
-  }
-
-  return all.join(" ");
-} */

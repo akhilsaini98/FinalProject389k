@@ -250,3 +250,6 @@ If you have two users looking at the interns and one person adds an intern, then
 
 ### 10. MONGODB
 We utilized mongodb to store all of our data regarding interns, activities and food(our three schemas).
+
+### 11. MODULE
+Modules added for fix_capitals and emojis.
