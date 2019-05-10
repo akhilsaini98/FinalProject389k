@@ -327,7 +327,45 @@ app.delete("/api/removeIntern", function(req, res) {
 
 });
 
+app.post("/api/addActivity", function(req, res) {
 
+  if(!req.body) { return res.send("No data recieved"); }
+
+  var activity = new data.Activity({
+
+    title: req.body["title"],
+    description: req.body["description"],
+    location: req.body["location"],
+    date: req.body["date"],
+
+ })
+
+ activity.save(function(err) {
+  if(err) throw err
+  res.send(activity)
+})
+
+});
+
+app.post("/api/addFood", function(req, res) {
+
+  if(!req.body) { return res.send("No data recieved"); }
+
+  var food = new data.Food({
+
+    title: req.body["title"],
+    rating: req.body["rating"],
+    location: req.body["location"],
+    reviews: req.body["reviews"],
+
+ })
+
+ food.save(function(err) {
+  if(err) throw err
+  res.send(food)
+})
+
+});
 
 app.post("/api/addIntern", function(req, res) {
 
@@ -338,7 +376,7 @@ app.post("/api/addIntern", function(req, res) {
     name: fix_capitals(req.body["name"]),
     company: fix_capitals(req.body["company"]),
     age: parseInt(req.body["age"]),
-    gender: fix_capitals(req.body.gender),
+    gender: fix_capitals(req.body["gender"]),
     phone: req.body["phone"],
     email: req.body["email"],
     characteristicsInterests: req.body["characteristicsInterests"].split(",")
