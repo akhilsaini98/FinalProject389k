@@ -3,7 +3,7 @@
 
 ---
 
-Names: Akhil Saini, Sahana Raju, Sam Jalocowiz
+Names: Akhil Saini, Sahana Raju, Sam Jalowicz
 
 Date: May 10, 2019
 
@@ -125,7 +125,7 @@ var options = {
     form: {
       title : 'Watch Waitress on Broadway',
       description : 'We will be going to the 2pm matinee show and will head to shake shack afterwards.',
-      location : Times Square,
+      location : 'Times Square',
       date : 'May 18, 2019',
     }
 };

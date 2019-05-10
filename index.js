@@ -387,6 +387,7 @@ app.post("/api/addIntern", function(req, res) {
 
  intern.save(function(err) {
   if(err) throw err
+  io.emit('new intern', intern);
   res.send(intern)
 })
 
