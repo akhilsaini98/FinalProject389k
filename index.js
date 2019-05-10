@@ -53,6 +53,17 @@ app.get('/activities',function(req,res){
 
 })
 
+app.get('/food',function(req,res){
+
+  data.Food.find({},function(err, food){
+    if(err) throw err
+    res.render('food',{
+      all : food
+    });
+})
+
+})
+
 app.get('/microsoft',function(req,res){
 
   data.Intern.find({company: "Microsoft"}, function(err, interns){
@@ -213,6 +224,30 @@ app.post('/addActivity',function(req,res){
 })
 
 })
+
+app.get('/addFood',function(req,res){
+  res.render('addFood',{});
+})
+
+
+app.post('/addFood',function(req,res){
+
+  var food = new data.Food({
+     title: req.body.title,
+     rating: parseInt(req.body.rating),
+     location: req.body.location,
+     reviews: req.body.reviews
+  })
+
+  food.save(function(err) {
+    if(err) throw err
+      res.render('successFood',{
+      title : req.body.title
+    });
+})
+
+})
+
 
 app.post("/api/addIntern", function(req, res) {
 

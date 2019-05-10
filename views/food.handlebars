@@ -1,0 +1,32 @@
+<link rel="stylesheet" type="text/css" href="/public/css/home.css">
+
+  <h1 id= "title">Find favorite food places in your area!</h1>
+
+<br>
+
+<div>
+  <table id="foodTable">
+    <tr>
+      <th>Food Title</th>
+      <th>Rating</th>
+      <th>Location</th>
+      <th>Reviews</th>
+    </tr>
+
+    {{#each all}}
+
+      <tr>
+        <td>{{this.title}}</td>
+        <td>{{this.rating}}</td>
+        <td>{{this.location}}</td>
+        <td>{{this.reviews}}</td>
+      </tr>
+
+    {{/each}}
+
+  </table>
+</div>
+
+<body>
+  <a href="/addFood" class="button">Click Here</a>
+</body>

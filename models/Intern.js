@@ -60,7 +60,7 @@ var foodSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    reviews: [String]
+    reviews: String
 });
 
 var Intern = mongoose.model('Intern', internSchema);
