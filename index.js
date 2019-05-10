@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var data = require('./models/Intern');
 var emoji = require('node-emoji');
-
+//var bread = require("./bread");
 
 dotenv.config();
 
@@ -460,8 +460,7 @@ http.listen(process.env.PORT || 3000, function() {
 
 
 
-function fix_capitals(string)
-{
+function fix_capitals(string){
   string = string.toLowerCase()
   var all = string.split(" ");
   var x = all.length
