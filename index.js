@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var data = require('./models/Intern');
 var emoji = require('node-emoji');
+//var bread = require("./bread");
 
 dotenv.config();
 
@@ -76,6 +77,7 @@ app.get('/food',function(req,res){
     if(err) throw err
     res.render('food',{
       all : food,
+      //Bread: bread,
       Bread: emoji.get('stuffed_flatbread'),
       Soup: emoji.get('shallow_pan_of_food')
     });
