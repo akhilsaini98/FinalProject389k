@@ -327,7 +327,25 @@ app.delete("/api/removeIntern", function(req, res) {
 
 });
 
+app.post("/api/addActivity", function(req, res) {
 
+  if(!req.body) { return res.send("No data recieved"); }
+
+  var intern = new data.Activity({
+
+    title: req.body["title"],
+    description: (req.body["description"]),
+    location: req.body["location"],
+    date: req.body["date"],
+
+ })
+
+ intern.save(function(err) {
+  if(err) throw err
+  res.send(intern)
+})
+
+});
 
 app.post("/api/addIntern", function(req, res) {
 
@@ -338,7 +356,7 @@ app.post("/api/addIntern", function(req, res) {
     name: fix_capitals(req.body["name"]),
     company: fix_capitals(req.body["company"]),
     age: parseInt(req.body["age"]),
-    gender: fix_capitals(req.body.gender),
+    gender: fix_capitals(req.body["gender"]),
     phone: req.body["phone"],
     email: req.body["email"],
     characteristicsInterests: req.body["characteristicsInterests"].split(",")
