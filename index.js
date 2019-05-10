@@ -42,15 +42,26 @@ app.get('/',function(req,res){
 
 })
 
+app.get('/activities',function(req,res){
+
+  data.Activity.find({},function(err, activities){
+    if(err) throw err
+    res.render('activities',{
+      all : activities
+    });
+})
+
+})
+
 app.get('/microsoft',function(req,res){
 
   data.Intern.find({company: "Microsoft"}, function(err, interns){
     if(err) throw err
-    
+
     res.render('microsoft',{
       mInterns: interns
    });
-  
+
 });
 
 })
@@ -59,20 +70,20 @@ app.get('/male',function(req,res){
 
   data.Intern.find({gender: "M"}, function(err, interns){
     if(err) throw err
-    
+
     res.render('male',{
       maleInterns: interns
     });
 });
 
- 
+
 })
 
 app.get('/female',function(req,res){
 
   data.Intern.find({gender: "F"}, function(err, interns){
     if(err) throw err
-    
+
     res.render('female',{
       femaleInterns: interns
     });
@@ -88,7 +99,7 @@ app.get('/alphabeticalNames',function(req,res){
       alphaName: _.sortBy(interns, 'name')
     });
 })
-  
+
 })
 
 app.get('/alphabeticalCompanys',function(req,res){
@@ -114,11 +125,11 @@ app.get('/random',function(req,res){
 
     _.each(interns, function(i) {
       var compName = i.company
-  
+
       if (cNames.includes(compName) === false) {
         cNames.push(compName)
       }
-  
+
     })
 
     cNames.sort()
@@ -138,7 +149,7 @@ app.post('/getRandom',function(req,res){
 
   data.Intern.find({company: inp}, function(err, interns){
     if(err) throw err
-    
+
     if (interns.length > 0) {
       answer = _.sample(interns);
     }
@@ -147,7 +158,7 @@ app.post('/getRandom',function(req,res){
       randomIntern : answer,
       original: inp
   });
-   
+
 });
 
 })
@@ -156,10 +167,11 @@ app.get('/addIntern',function(req,res){
   res.render('addIntern',{});
 })
 
+
 app.post('/addIntern',function(req,res){
 
   var intern = new data.Intern({
-   
+
      name: fix_capitals(req.body.name),
      company: fix_capitals(req.body.company),
      age: parseInt(req.body.age),
@@ -176,7 +188,30 @@ app.post('/addIntern',function(req,res){
       firstName : fix_capitals(req.body.name.split(" ")[0])
     });
 })
- 
+
+})
+
+app.get('/addActivity',function(req,res){
+  res.render('addActivity',{});
+})
+
+
+app.post('/addActivity',function(req,res){
+
+  var activity = new data.Activity({
+
+     title: req.body.title,
+     description: req.body.description,
+     location: fix_capitals(req.body.location),
+  })
+
+  activity.save(function(err) {
+    if(err) throw err
+      res.render('successActivity',{
+      title : req.body.title
+    });
+})
+
 })
 
 app.post("/api/addIntern", function(req, res) {
@@ -184,7 +219,7 @@ app.post("/api/addIntern", function(req, res) {
   if(!req.body) { return res.send("No data recieved"); }
 
   var intern = new data.Intern({
-   
+
     name: fix_capitals(req.body["name"]),
     company: fix_capitals(req.body["company"]),
     age: parseInt(req.body["age"]),
@@ -194,7 +229,7 @@ app.post("/api/addIntern", function(req, res) {
     characteristicsInterests: req.body["characteristicsInterests"].split(",")
 
  })
-  
+
  intern.save(function(err) {
   if(err) throw err
   res.send(intern)
@@ -238,7 +273,7 @@ app.get("/api/getAlphaName", function(req, res) {
   data.Intern.find({},function(err, interns){
     if(err) throw err
     res.send(_.sortBy(interns, 'name'))
-    
+
 })
 
 });

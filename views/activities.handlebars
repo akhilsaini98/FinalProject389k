@@ -1,0 +1,30 @@
+<link rel="stylesheet" type="text/css" href="/public/css/home.css">
+
+  <h1 id= "title">Find an Activity to do!</h1>
+
+<br>
+
+<div>
+  <table id="activityTable">
+    <tr>
+      <th>Activity Title</th>
+      <th>Description</th>
+      <th>Location</th>
+    </tr>
+
+    {{#each all}}
+
+      <tr>
+        <td>{{this.title}}</td>
+        <td>{{this.description}}</td>
+        <td>{{this.location}}</td>
+      </tr>
+
+    {{/each}}
+
+  </table>
+</div>
+
+<body>
+  <a href="/addActivity" class="button">Click Here</a>
+</body>
