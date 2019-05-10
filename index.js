@@ -7,7 +7,12 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 var data = require('./models/Intern');
 var emoji = require('node-emoji');
+<<<<<<< HEAD
 var fix_capitals = require("./fix_capitals");
+=======
+//var bread = require("./bread");
+
+>>>>>>> a3dca1b8b29b253d9f539bd2aa0398d6af8d094c
 dotenv.config();
 
 console.log(process.env.MONGODB)
@@ -76,6 +81,7 @@ app.get('/food',function(req,res){
     if(err) throw err
     res.render('food',{
       all : food,
+      //Bread: bread,
       Bread: emoji.get('stuffed_flatbread'),
       Soup: emoji.get('shallow_pan_of_food')
     });
