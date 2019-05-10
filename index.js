@@ -460,19 +460,3 @@ http.listen(process.env.PORT || 3000, function() {
 });
 
 
-
-<<<<<<< HEAD
-function fix_capitals(string){
-=======
-/* function fix_capitals(string)
-{
->>>>>>> d3f0835abe3876cbf0a3dee758884e5c9f06e4fd
-  string = string.toLowerCase()
-  var all = string.split(" ");
-  var x = all.length
-  for (var i = 0; i < x; i++) {
-      all[i] = all[i][0].toUpperCase() + all[i].substr(1);
-  }
-
-  return all.join(" ");
-} */
