@@ -40,8 +40,6 @@ app.get('/',function(req,res){
     });
 })
 
-console.log("Hi")
-
 })
 
 app.get('/activities',function(req,res){
@@ -194,7 +192,6 @@ app.post('/addIntern',function(req,res){
 })
 
 app.get('/addActivity',function(req,res){
-  console.log("yeet")
   res.render('addActivity',{});
 })
 
