@@ -8,6 +8,7 @@ var dotenv = require('dotenv');
 var data = require('./models/Intern');
 var emoji = require('node-emoji');
 //var bread = require("./bread");
+var fix_capitals = require("./fix_capitals");
 
 dotenv.config();
 
@@ -460,7 +461,12 @@ http.listen(process.env.PORT || 3000, function() {
 
 
 
+<<<<<<< HEAD
 function fix_capitals(string){
+=======
+/* function fix_capitals(string)
+{
+>>>>>>> d3f0835abe3876cbf0a3dee758884e5c9f06e4fd
   string = string.toLowerCase()
   var all = string.split(" ");
   var x = all.length
@@ -469,4 +475,4 @@ function fix_capitals(string){
   }
 
   return all.join(" ");
-}
+} */
